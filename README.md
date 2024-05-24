@@ -1,6 +1,6 @@
 # Especificações do Projeto: Sistema de Pedidos Monolítico
 
-##Introdução
+## Introdução
 Este documento especifica a implementação de uma aplicação monolítica para gerenciamento de pedidos. A aplicação inclui um back-end com funcionalidades de CRUD para usuários e pedidos, e um front-end com autenticação e gerenciamento de pedidos.
 
 ##Tecnologias Utilizadas
@@ -12,8 +12,8 @@ Este documento especifica a implementação de uma aplicação monolítica para 
     -Tailwind CSS para estilização do front-end
     JavaScript para funcionalidades do front-end
 
-##Estrutura do Projeto
-
+## Estrutura do Projeto
+```
 project-root/
 ├── back-end/
 │   ├── controllers/
@@ -28,19 +28,21 @@ project-root/
 │   └── index.html
 ├── docker-compose.yml
 └── README.md
+```
 
-##Configuração e Execução
+## Configuração e Execução
 
 Setup em um Comando
 Utilize um script Makefile para facilitar o setup e execução da aplicação:
 
-
 setup:
+```
     docker-compose up --build
+```
 
-##Back-end
+## Back-end
 Modelos de Dados
-Usuário
+### Usuário
 
 Tabela: users
 
@@ -54,7 +56,7 @@ Tabela: users
     created_at (timestamp)
     updated_at (timestamp)
 
-Pedido
+### Pedido
 
 Tabela: orders
 
@@ -66,7 +68,7 @@ Tabela: orders
     created_at (timestamp)
     updated_at (timestamp)
 
-Rotas
+### Rotas
 Usuários
 
     GET /users - Listar todos os usuários
@@ -93,7 +95,7 @@ Testes
     Testes unitários para as rotas de usuários e pedidos
     Utilização de PHPUnit para criação dos testes
 
-Front-end
+## Front-end
 Componentes
 Sidebar
 
@@ -130,14 +132,44 @@ Estilização
     Utilização de Tailwind CSS para estilização
     Implementação de modo dark coerente com o tema escolhido
 
-Pontos Bônus
+## Pontos Bônus
 
     Criptografia reversível de dados sensíveis usando uma biblioteca como php-encryption
     Histórico de commits bem documentado
     Páginas responsivas para melhor experiência em dispositivos móveis
     Passo-a-passo detalhado do processo de deploy
 
-##Considerações Finais
+## Considerações Finais
 
 O projeto deve seguir as melhores práticas de segurança, estilo de código, e desenvolvimento testável. A documentação clara e o uso de ferramentas modernas são essenciais para o sucesso da aplicação.
 
+Configuração e Execução
+Setup do Docker
+
+    Configure o Docker:
+
+    bash
+```
+    docker-compose up --build
+```
+Migrações do Banco de Dados
+
+    Execute as migrações:
+
+    bash
+```
+    docker exec -it app-container php back-end/database/migrations/2024_05_22_000000_create_users_table.php
+    docker exec -it app-container php back-end/database/migrations/2024_05_22_000001_create_orders_table.php
+```
+# Executar Testes
+
+    Execute os testes:
+
+    bash
+    ```
+    docker exec -it app-container vendor/bin/phpunit --testdox
+    ```
+
+# Verificar Aplicação
+
+    Verifique se a aplicação está rodando corretamente acessando http://localhost:8000 em seu navegador.

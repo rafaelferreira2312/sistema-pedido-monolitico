@@ -1,0 +1,31 @@
+version: '3.8'
+services:
+  app:
+    build: ./back-end
+    container_name: app-container
+    ports:
+      - "8000:80"
+    volumes:
+      - ./back-end:/var/www/html
+    environment:
+      - DB_CONNECTION=pgsql
+      - DB_HOST=db
+      - DB_PORT=5432
+      - DB_DATABASE=app_db
+      - DB_USERNAME=app_user
+      - DB_PASSWORD=app_password
+
+  db:
+    image: postgres:latest
+    container_name: db-container
+    environment:
+      POSTGRES_DB: app_db
+      POSTGRES_USER: app_user
+      POSTGRES_PASSWORD: app_password
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata:
